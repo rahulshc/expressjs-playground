@@ -1,17 +1,10 @@
 const path=require('path');
 const express=require('express');
-const rootDir=require('../util/path');
+//const rootDir=require('../util/path');
 const router= express.Router();
-const adminData=require('./admin');
+const productsController=require('../controllers/products');
 
-router.get('/', (req, res, next)=>{
-    //console.log(adminData.products);
-    //res.sendFile(path.join(__dirname, '../', 'views', 'shop.html'));
-    //res.sendFile(path.join(__dirname, '..', 'views', 'shop.html'));
-    //res.sendFile(path.join(rootDir, 'views', 'shop.html'));
-    const products = adminData.products;
-    res.render('shop', {prods: products, pageTitle: 'Shop', path: '/'});
-});
+router.get('/', productsController.getProducts);
 
 
 module.exports = router;
