@@ -27,6 +27,7 @@ module.exports = class Product {
 
     save(){
         //products.push(this);
+        this.id=Math.random().toString();
         getProductsFromFile(products=>{
             products.push(this);//this will work because of arrow function it refers to the class
             fs.writeFile(p, JSON.stringify(products), (err)=> {
@@ -51,5 +52,12 @@ module.exports = class Product {
     static fetchAll(cb) {
         getProductsFromFile(cb);
        
+    }
+
+    static findById(id, cb){
+        getProductsFromFile(products => {
+            const product = products.find(p => p.id=== id);
+            cb(product);
+        })
     }
 }
